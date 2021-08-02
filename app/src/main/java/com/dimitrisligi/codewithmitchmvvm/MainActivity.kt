@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.SimpleAdapter
 import android.widget.Toast
 import androidx.cursoradapter.widget.SimpleCursorAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.dimitrisligi.codewithmitchmvvm.databinding.ActivityMainBinding
@@ -24,10 +25,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        viewModel.user.observe(this,
-            {
-                Toast.makeText(this,it.toString(),Toast.LENGTH_LONG).show()
-            })
+        viewModel.user.observe(this, {
+            binding?.tvUserTv?.text = it.toString()
+        })
 
 
         viewModel.setUserID("1")
