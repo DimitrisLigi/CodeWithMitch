@@ -17,6 +17,6 @@ data class UserDomainModel(
     val image: String
 ){
     override fun toString(): String {
-        return "User's email: $email\nUser's username: $username\nUser's image: $image"
+        return "User's email: $email\nUser's username: $username\nUser's image: $image\n"
     }
 }
