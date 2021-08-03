@@ -5,6 +5,7 @@ import api.RetrofitBuilder
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import models.SecondDomainModel
 import models.UserDomainModel
 
 object MainRepository {
@@ -30,6 +31,24 @@ object MainRepository {
         }
     }
 
+
+    fun getSecondUser(): LiveData<SecondDomainModel>{
+        job = Job()
+        return object : LiveData<SecondDomainModel>(){
+            override fun onActive() {
+                super.onActive()
+                job?.let {
+                    CoroutineScope(IO+it).launch {
+                        val secondUser = RetrofitBuilder.apiService.getSecondUser()
+                        withContext(Main){
+                            value = secondUser
+                            it.complete()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     fun cancelJobs(){
         job?.cancel()

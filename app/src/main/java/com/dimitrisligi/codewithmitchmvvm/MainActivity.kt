@@ -25,12 +25,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        viewModel.user.observe(this, {
-            binding?.tvUserTv?.text = it.toString()
+//        viewModel.user.observe(this, {
+//            binding?.tvUserTv?.text = it.toString()
+//        })
+//
+//
+//        viewModel.setUserID("1")
+
+
+        viewModel.secondUser.observe(this,{
+            binding?.tvUserTv?.text = it.data.toString()
         })
-
-
-        viewModel.setUserID("1")
     }
 
 
